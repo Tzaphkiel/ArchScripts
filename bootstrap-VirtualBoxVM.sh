@@ -1,8 +1,9 @@
 # confirm you can access the internet
-if [[ ! $(curl -I http://www.google.com/ | head -n 1) =~ "200 OK" ]]; then
-  echo "Your Internet seems broken. Press Ctrl-C to abort or enter to continue."
-  read
-fi
+# current site chosen gives a 302 not a 200
+# if [[ ! $(curl -I http://www.google.com/ | head -n 1) =~ "200 OK" ]]; then
+#   echo "Your Internet seems broken. Press Ctrl-C to abort or enter to continue."
+#   read
+# fi
 
 # make 2 partitions on the disk.
 parted -s /dev/sda mktable msdos
@@ -13,7 +14,7 @@ parted -s /dev/sda mkpart primary 100m 100%
 # /boot
 mkfs.ext2 /dev/sda1
 # /
-mkfs.btrfs /dev/sda2
+mkfs.ext4 /dev/sda2
 
 # set up /mnt
 mount /dev/sda2 /mnt
@@ -35,7 +36,7 @@ arch-chroot /mnt /bin/bash <<EOF
 # set initial hostname
 echo "archlinux-$(date -I)" >/etc/hostname
 
-# set initial timezone to America/Los_Angeles
+# set initial timezone to Europe/Brussels
 ln -s /usr/share/zoneinfo/Europe/Brussels /etc/localtime
 
 # set initial locale
