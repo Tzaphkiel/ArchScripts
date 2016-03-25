@@ -56,10 +56,6 @@ mkinitcpio -p linux
 # install syslinux bootloader
 syslinux-install_update -i -a -m
 
-# update syslinux config with correct root disk
-sed 's/root=\S+/root=\/dev\/sda2/' < /boot/syslinux/syslinux.cfg > /boot/syslinux/syslinux.cfg.new
-mv /boot/syslinux/syslinux.cfg.new /boot/syslinux/syslinux.cfg
-
 # set root password to "root"
 echo root:root | chpasswd
 
@@ -69,4 +65,4 @@ EOF
 # unmount
 umount /mnt/{boot,}
 
-echo "Done! Unmount the CD image from the VM, then type 'reboot'."
+echo "All Done! Unmount the CD image from the VM & type 'reboot'."
