@@ -28,7 +28,7 @@ pacstrap /mnt base base-devel syslinux vim netctl net-tools dialog
 arch-chroot /mnt pacman -S syslinux
 
 # generate fstab
-genfstab -p /mnt >>/mnt/etc/fstab
+genfstab -U -p /mnt >>/mnt/etc/fstab
 
 # chroot
 arch-chroot /mnt /bin/bash <<EOF
